@@ -1,11 +1,10 @@
 import express from 'express';
-import { create, findAll, findOne, update, remove } from '../controllers/userController.js';
-import { createUserValidation } from '../src/validators/user.validator.js';
 import { verifyToken } from '../src/middlewares/auth.js';
+import { create, findAll, findOne, update, remove } from '../controllers/userController.js';
 
 const router = express.Router();
 
-router.post('/', createUserValidation, create);
+router.post('/', verifyToken, create);
 router.get('/', verifyToken, findAll);
 router.get('/:id', verifyToken, findOne);
 router.put('/:id', verifyToken, update);
