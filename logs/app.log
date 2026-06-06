@@ -1,0 +1,350 @@
+2026-06-04 10:08:05 [right meow!] info: Registering new user
+2026-06-04 10:08:05 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 10:08:05 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 10:08:05 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 10:08:25 [right meow!] info: Registering new user
+2026-06-04 10:08:25 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 10:08:25 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 10:08:25 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:43:13 [right meow!] info: Registering new user
+2026-06-04 12:43:13 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:43:13 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:43:13 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:48:45 [right meow!] info: Registering new user
+2026-06-04 12:48:45 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:48:45 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:48:45 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:49:25 [right meow!] info: Registering new user
+2026-06-04 12:49:25 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:49:25 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:49:25 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:51:06 [right meow!] info: Registering new user
+2026-06-04 12:51:06 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:51:06 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:51:06 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:51:14 [right meow!] info: Registering new user
+2026-06-04 12:51:14 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:51:14 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:51:14 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:53:54 [right meow!] info: Registering new user
+2026-06-04 12:53:54 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:53:54 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:53:54 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:54:09 [right meow!] info: Registering new user
+2026-06-04 12:54:09 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:54:09 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:54:09 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:55:09 [right meow!] info: Registering new user
+2026-06-04 12:55:09 [right meow!] info: ========================== Full request body: ==========================
+2026-06-04 12:55:09 [right meow!] info: {
+  "account": {
+    "email": "test@gmail.com",
+    "password": "Mail@20262026"
+  },
+  "email": {
+    "verificationCode": "123456",
+    "phoneNumber": "123-456-7890",
+    "phoneCode": "123456"
+  },
+  "profile": {
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "displayName": "Jane Doe",
+    "streetAddress": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA"
+  },
+  "business": {
+    "businessName": "Test Business",
+    "businessType": "Retail",
+    "primaryCategory": "Fashion",
+    "monthlyOrders": "100"
+  },
+  "notifications": {
+    "emailUpdates": true,
+    "smsUpdates": false,
+    "marketingUpdates": false
+  }
+}
+2026-06-04 12:55:09 [right meow!] info: ========================== Full request body: ==========================

@@ -6,12 +6,13 @@ import { errorResponse, successResponse } from "../utils/response.js";
 import jwt from 'jsonwebtoken';
 import { createUser } from "../models/userModel.js";
 import logger from "../utils/logger.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 export const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -54,6 +55,17 @@ export const login = async (req, res, next) => {
             }
         );
 
+        // Clear existing token cookie if it exists
+        res.clearCookie("token");
+        // SET COOKIE HERE
+        res.cookie("token", token, {
+            httpOnly: true, // cannot be accessed by JS
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+        
+
         return successResponse(
             res,
             'User logged in successfully',
@@ -61,8 +73,9 @@ export const login = async (req, res, next) => {
                 token,
                 user: {
                     id: user.id,
-                    name: user.name,
-                    email: user.email
+                    name: user.displayName || user.first_name,
+                    email: user.email,
+                    checkoutMode: "collection"
                 }
             },
             200
@@ -84,9 +97,9 @@ export const register = async (req, res, next) => {
 
         logger.info('Registering new user');
         logger.info('========================== Full request body: ==========================');
-        logger.info({...req.body});
+        logger.info({ ...req.body });
         logger.info('========================== Full request body: ==========================');
-        
+
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -110,8 +123,10 @@ export const register = async (req, res, next) => {
             res,
             'User created successfully',
             {
-                id: user.id, firstName: user.first_name, lastName: user.last_name, email: user.email, displayName: user.display_name, phoneNumber: user.phone_number, streetAddress: user.street_address, city: user.city, state: user.state, zipCode: user.zip_code, country: user.country,
-                // businessName: user.business_name, businessType: user.business_type, primaryCategory: user.primary_category, monthlyOrders: user.monthly_orders, emailUpdates: user.email_updates, smsUpdates: user.sms_updates, marketingUpdates: user.marketing_updates 
+                user: {
+                    id: user.id, firstName: user.first_name, lastName: user.last_name, email: user.email, displayName: user.display_name, phoneNumber: user.phone_number, streetAddress: user.street_address, city: user.city, state: user.state, zipCode: user.zip_code, country: user.country, imageUrl: user.image_url, checkoutMode: "collection"
+                    // businessName: user.business_name, businessType: user.business_type, primaryCategory: user.primary_category, monthlyOrders: user.monthly_orders, emailUpdates: user.email_updates, smsUpdates: user.sms_updates, marketingUpdates: user.marketing_updates
+                }
             },
             201
         );
