@@ -1,7 +1,6 @@
 import express from 'express';
 import { verifyCookies, verifyToken } from '../src/middlewares/auth.js';
 import { create, findAll, removeAll, remove } from '../controllers/cartController.js';
-import { upload } from '../src/middlewares/upload.js';
 
 const router = express.Router();
 
