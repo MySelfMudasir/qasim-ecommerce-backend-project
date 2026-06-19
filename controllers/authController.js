@@ -75,7 +75,7 @@ export const login = async (req, res, next) => {
                     id: user.id,
                     name: user.displayName || user.first_name,
                     email: user.email,
-                    checkoutMode: "collection"
+                    checkoutMode: "delivery"
                 }
             },
             200

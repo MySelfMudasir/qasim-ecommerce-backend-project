@@ -14,12 +14,10 @@ export const create = async (req, res, next) => {
     try {
         // Pull both variables straight from req.body
         const { userId, productId } = req.body;
-
-        const CartItem = await createCartItem(
-            userId,
-            productId
-        );
-
+        if (!userId || !productId) {
+            return errorResponse(res, 'userId and productId are required', 400);
+        }
+        const CartItem = await createCartItem(userId, productId);
         return successResponse(
             res,
             'Cart item added successfully',

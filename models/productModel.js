@@ -78,6 +78,7 @@ export const getAllProducts = async (filters) => {
             p.storage_type AS "storageType",
             p.size,
             c.name AS category,
+            c.id AS "categoryId",
             b.name AS brand
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.id
@@ -173,6 +174,7 @@ export const getProductById = async (id) => {
             p.storage_type AS "storageType",
             p.size,
             c.name AS "categoryName",
+            c.id AS "categoryId",
             b.name AS "brandName"
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.id
@@ -223,6 +225,7 @@ export const getProductById = async (id) => {
         storageType: product.storageType,
         size: product.size,
         category: product.categoryName,
+        categoryId: product.categoryId,
         brand: product.brandName,
 
         // reviews: reviewsRes.rows.map(r => ({
