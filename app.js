@@ -18,16 +18,16 @@ import { errorHandler } from './src/middlewares/errorHandler.js';
 
 const app = express();
 
-// app.use(cors());
-app.use(
-    cors({
-        origin: [
-            // 'http://localhost:4200'
-            '*'
-        ],
-        credentials: true
-    })
-);
+app.use(cors());
+// app.use(
+//     cors({
+//         origin: [
+//             // 'http://localhost:4200'
+//             '*'
+//         ],
+//         credentials: true
+//     })
+// );
 
 
 // app.use(helmet());
