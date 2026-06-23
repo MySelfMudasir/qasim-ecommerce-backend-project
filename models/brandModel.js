@@ -1,12 +1,13 @@
 import pool from '../config/db.js';
 import fs from 'fs';
+import { buildProductImageUrl } from '../utils/fileUrl.js';
 
 
-export const createCategory = async (
+export const createBrand = async (
     name
 ) => {
     const query = `
-        INSERT INTO categories (name)
+        INSERT INTO brands (name)
         VALUES ($1)
         RETURNING *;
     `;
@@ -19,10 +20,10 @@ export const createCategory = async (
 };
 
 
-export const getAllCategories = async () => {
+export const getAllBrands = async () => {
     const result = await pool.query(`
         SELECT id, name
-        FROM categories
+        FROM brands
         ORDER BY name
     `);
     return result.rows;
@@ -30,12 +31,12 @@ export const getAllCategories = async () => {
 
 
 
-export const updateCategory = async (
+export const updateBrand = async (
     id,
     name
 ) => {
     const query = `
-        UPDATE categories
+        UPDATE brands
         SET name = $1
         WHERE id = $2
         RETURNING *;
@@ -47,9 +48,9 @@ export const updateCategory = async (
     return result.rows[0];
 };
 
-export const deleteCategory = async (id) => {
+export const deleteBrand = async (id) => {
     const result = await pool.query(
-        'DELETE FROM categories WHERE id = $1 RETURNING *',
+        'DELETE FROM brands WHERE id = $1 RETURNING *',
         [id]
     );
 

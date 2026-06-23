@@ -64,7 +64,7 @@ export const login = async (req, res, next) => {
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
-        
+
 
         return successResponse(
             res,
@@ -115,6 +115,16 @@ export const register = async (req, res, next) => {
                 400
             );
         }
+
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
+            return errorResponse(
+                res,
+                'User with this email already exists',
+                400
+            );
+        }
+
 
         const hashedPassword = await bcryptHash(password);
         const user = await createUser(firstName, email, hashedPassword, phoneNumber, lastName, displayName, streetAddress, city, state, zipCode, country, businessName, businessType, primaryCategory, monthlyOrders, emailUpdates, smsUpdates, marketingUpdates);

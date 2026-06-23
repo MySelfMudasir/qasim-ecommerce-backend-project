@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.post(
     '/',
-    verifyToken,
     upload.fields([
         { name: 'thumbnail', maxCount: 1 },
         { name: 'gallery', maxCount: 10 }
@@ -18,11 +17,10 @@ router.post(
 
 router.get('/', findAll);
 router.get('/:id', findOne);
-router.delete('/:id', verifyToken, remove);
+router.delete('/:id', remove);
 
 router.put(
     '/:id',
-    verifyToken,
     upload.fields([
         { name: 'thumbnail', maxCount: 1 },
         { name: 'gallery', maxCount: 10 }

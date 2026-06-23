@@ -53,7 +53,9 @@ export const getAllProducts = async (filters) => {
     const {
         search,
         brand,
+        brandId,
         category,
+        categoryId,
         storageType,
         size,
         minPrice,
@@ -79,7 +81,8 @@ export const getAllProducts = async (filters) => {
             p.size,
             c.name AS category,
             c.id AS "categoryId",
-            b.name AS brand
+            b.name AS brand,
+            b.id AS "brandId"
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.id
         LEFT JOIN brands b ON p.brand_id = b.id
@@ -106,9 +109,21 @@ export const getAllProducts = async (filters) => {
         index++;
     }
 
+    if (brandId) {
+        query += ` AND b.id = $${index}`;
+        values.push(brandId);
+        index++;
+    }
+
     if (category) {
         query += ` AND c.name ILIKE $${index}`;
         values.push(`%${category}%`);
+        index++;
+    }
+
+    if (categoryId) {
+        query += ` AND c.id = $${index}`;
+        values.push(categoryId);
         index++;
     }
 
@@ -153,10 +168,28 @@ export const getAllProducts = async (filters) => {
 
     const result = await pool.query(query, values);
 
-    return result.rows.map(product => ({
-        ...product,
-        imageUrl: buildProductImageUrl(product.imageUrl)
-    }));
+    const products = await Promise.all(
+        result.rows.map(async (product) => {
+            const imagesRes = await pool.query(
+                `
+            SELECT image_url AS "imageUrl"
+            FROM product_images
+            WHERE product_id = $1
+            `,
+                [product.id]
+            );
+
+            return {
+                ...product,
+                imageUrl: buildProductImageUrl(product.imageUrl),
+                images: imagesRes.rows.map((img) =>
+                    buildProductImageUrl(img.imageUrl)
+                )
+            };
+        })
+    );
+
+    return products;
 };
 
 
@@ -175,7 +208,8 @@ export const getProductById = async (id) => {
             p.size,
             c.name AS "categoryName",
             c.id AS "categoryId",
-            b.name AS "brandName"
+            b.name AS "brandName",
+            b.id AS "brandId"
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.id
         LEFT JOIN brands b ON p.brand_id = b.id
@@ -227,6 +261,7 @@ export const getProductById = async (id) => {
         category: product.categoryName,
         categoryId: product.categoryId,
         brand: product.brandName,
+        brandId: product.brandId,
 
         // reviews: reviewsRes.rows.map(r => ({
         //     id: r.id,
