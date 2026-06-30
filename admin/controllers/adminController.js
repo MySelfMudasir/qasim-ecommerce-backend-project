@@ -1,11 +1,11 @@
-import { bcryptCompare } from "../utils/bcrypt.js";
+import { bcryptCompare } from "../../utils/bcrypt.js";
 import { validationResult } from 'express-validator';
-import { bcryptHash } from '../utils/bcrypt.js';
-import { getUserByEmail } from "../models/authModel.js";
-import { errorResponse, successResponse } from "../utils/response.js";
+import { bcryptHash } from '../../utils/bcrypt.js';
+import { getUserByEmail } from "../models/adminModel.js";
+import { errorResponse, successResponse } from "../../utils/response.js";
 import jwt from 'jsonwebtoken';
-import { createUser } from "../models/userModel.js";
-import logger from "../utils/logger.js";
+import { createUser } from "../models/adminModel.js";
+import logger from "../../utils/logger.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -63,22 +63,6 @@ export const login = async (req, res, next) => {
             }
         );
 
-        // Clear existing token cookie if it exists
-        res.clearCookie("token", {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict"
-        });
-
-        // SET COOKIE HERE
-        res.cookie("token", token, {
-            httpOnly: true, // cannot be accessed by JS
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
-
-
         return successResponse(
             res,
             'User logged in successfully',
@@ -88,7 +72,6 @@ export const login = async (req, res, next) => {
                     id: user.id,
                     name: user.displayName || user.first_name,
                     email: user.email,
-                    checkoutMode: "delivery",
                     role: user.role,
                     isActive: user.is_active
                 }
@@ -105,10 +88,7 @@ export const login = async (req, res, next) => {
 export const register = async (req, res, next) => {
     try {
         const { email, password } = req.body.account;
-        const { verificationCode, phoneNumber, phoneCode } = req.body.email;
-        const { firstName, lastName, displayName, streetAddress, city, state, zipCode, country } = req.body.profile;
-        const { businessName, businessType, primaryCategory, monthlyOrders } = req.body.business;
-        const { emailUpdates, smsUpdates, marketingUpdates } = req.body.notifications;
+        const { firstName, lastName, displayName } = req.body.profile;
 
         logger.info('Registering new user');
         logger.info('========================== Full request body: ==========================');
@@ -142,15 +122,14 @@ export const register = async (req, res, next) => {
 
 
         const hashedPassword = await bcryptHash(password);
-        const user = await createUser(firstName, email, hashedPassword, phoneNumber, lastName, displayName, streetAddress, city, state, zipCode, country, businessName, businessType, primaryCategory, monthlyOrders, emailUpdates, smsUpdates, marketingUpdates);
+        const user = await createUser(firstName, email, hashedPassword, lastName, displayName);
 
         return successResponse(
             res,
             'User created successfully',
             {
                 user: {
-                    id: user.id, firstName: user.first_name, lastName: user.last_name, email: user.email, displayName: user.display_name, phoneNumber: user.phone_number, streetAddress: user.street_address, city: user.city, state: user.state, zipCode: user.zip_code, country: user.country, imageUrl: user.image_url, checkoutMode: "collection", role: user.role, isActive: user.is_active
-                    // businessName: user.business_name, businessType: user.business_type, primaryCategory: user.primary_category, monthlyOrders: user.monthly_orders, emailUpdates: user.email_updates, smsUpdates: user.sms_updates, marketingUpdates: user.marketing_updates
+                    id: user.id, firstName: user.first_name, lastName: user.last_name, email: user.email, displayName: user.display_name, role: user.role, isActive: user.is_active
                 }
             },
             201

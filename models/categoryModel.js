@@ -23,7 +23,7 @@ export const getAllCategories = async () => {
     const result = await pool.query(`
         SELECT id, name
         FROM categories
-        ORDER BY name
+        ORDER BY id ASC
     `);
     return result.rows;
 }

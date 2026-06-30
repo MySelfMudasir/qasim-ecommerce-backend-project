@@ -10,6 +10,6 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.clear()
-    // logger.info(`Server running on port ${PORT}`);
+    logger.info(`Server running on port ${PORT}`);
     console.log(colors.green(`Server running on port`), colors.yellow(PORT));
 });

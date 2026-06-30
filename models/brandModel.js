@@ -24,7 +24,7 @@ export const getAllBrands = async () => {
     const result = await pool.query(`
         SELECT id, name
         FROM brands
-        ORDER BY name
+        ORDER BY id ASC
     `);
     return result.rows;
 }

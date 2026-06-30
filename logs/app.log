@@ -1,420 +1,86 @@
-2026-06-04 10:08:05 [right meow!] info: Registering new user
-2026-06-04 10:08:05 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 10:08:05 [right meow!] info: {
+2026-06-30 12:33:27 [right meow!] info: Server running on port 3000
+2026-06-30 12:33:39 [right meow!] info: Server running on port 3000
+2026-06-30 12:33:47 [right meow!] info: Server running on port 3000
+2026-06-30 12:39:57 [right meow!] info: Server running on port 3000
+2026-06-30 13:59:51 [right meow!] info: Server running on port 3000
+2026-06-30 14:54:08 [right meow!] info: Registering new user
+2026-06-30 14:54:08 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 14:54:08 [right meow!] info: {
   "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
+    "email": "mudasir@example.com",
+    "password": "123456"
   },
   "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
+    "firstName": "admin",
+    "lastName": "123",
+    "displayName": "admin"
   }
 }
-2026-06-04 10:08:05 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 10:08:25 [right meow!] info: Registering new user
-2026-06-04 10:08:25 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 10:08:25 [right meow!] info: {
+2026-06-30 14:54:08 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 15:04:52 [right meow!] info: Registering new user
+2026-06-30 15:04:52 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 15:04:52 [right meow!] info: {
   "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
+    "email": "mudasir@example.com",
+    "password": "123456"
   },
   "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
+    "firstName": "admin",
+    "lastName": "123",
+    "displayName": "admin"
   }
 }
-2026-06-04 10:08:25 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:43:13 [right meow!] info: Registering new user
-2026-06-04 12:43:13 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:43:13 [right meow!] info: {
+2026-06-30 15:04:52 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 15:09:55 [right meow!] info: Registering new user
+2026-06-30 15:09:55 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 15:09:55 [right meow!] info: {
   "account": {
-    "email": "test@gmail.com",
+    "email": "admin@gmail.com",
     "password": "Mail@20262026"
   },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
   "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
+    "firstName": "admin",
+    "lastName": "123",
+    "displayName": "admin"
   }
 }
-2026-06-04 12:43:13 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:48:45 [right meow!] info: Registering new user
-2026-06-04 12:48:45 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:48:45 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:48:45 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:49:25 [right meow!] info: Registering new user
-2026-06-04 12:49:25 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:49:25 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:49:25 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:51:06 [right meow!] info: Registering new user
-2026-06-04 12:51:06 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:51:06 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:51:06 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:51:14 [right meow!] info: Registering new user
-2026-06-04 12:51:14 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:51:14 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:51:14 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:53:54 [right meow!] info: Registering new user
-2026-06-04 12:53:54 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:53:54 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:53:54 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:54:09 [right meow!] info: Registering new user
-2026-06-04 12:54:09 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:54:09 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:54:09 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:55:09 [right meow!] info: Registering new user
-2026-06-04 12:55:09 [right meow!] info: ========================== Full request body: ==========================
-2026-06-04 12:55:09 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-04 12:55:09 [right meow!] info: ========================== Full request body: ==========================
-2026-06-23 11:59:12 [right meow!] info: Registering new user
-2026-06-23 11:59:12 [right meow!] info: ========================== Full request body: ==========================
-2026-06-23 11:59:12 [right meow!] info: {
-  "account": {
-    "email": "test@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-23 11:59:12 [right meow!] info: ========================== Full request body: ==========================
-2026-06-24 10:31:57 [right meow!] info: Registering new user
-2026-06-24 10:31:57 [right meow!] info: ========================== Full request body: ==========================
-2026-06-24 10:31:57 [right meow!] info: {
-  "account": {
-    "email": "test3@gmail.com",
-    "password": "Mail@20262026"
-  },
-  "email": {
-    "verificationCode": "123456",
-    "phoneNumber": "123-456-7890",
-    "phoneCode": "123456"
-  },
-  "profile": {
-    "firstName": "Jane",
-    "lastName": "Doe",
-    "displayName": "Jane Doe",
-    "streetAddress": "123 Main St",
-    "city": "New York",
-    "state": "okk",
-    "zipCode": "10001",
-    "country": "USA"
-  },
-  "business": {
-    "businessName": "Test Business",
-    "businessType": "Retail",
-    "primaryCategory": "Fashion",
-    "monthlyOrders": "100"
-  },
-  "notifications": {
-    "emailUpdates": true,
-    "smsUpdates": false,
-    "marketingUpdates": false
-  }
-}
-2026-06-24 10:31:57 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 15:09:55 [right meow!] info: ========================== Full request body: ==========================
+2026-06-30 15:15:46 [right meow!] info: Server running on port 3000
+2026-06-30 15:16:26 [right meow!] info: Server running on port 3000
+2026-06-30 15:16:46 [right meow!] info: Server running on port 3000
+2026-06-30 15:17:14 [right meow!] info: Server running on port 3000
+2026-06-30 15:17:37 [right meow!] info: Server running on port 3000
+2026-06-30 15:19:16 [right meow!] info: Server running on port 3000
+2026-06-30 15:20:15 [right meow!] info: Server running on port 3000
+2026-06-30 15:20:33 [right meow!] info: Server running on port 3000
+2026-06-30 15:22:08 [right meow!] info: Server running on port 3000
+2026-06-30 15:22:45 [right meow!] info: Server running on port 3000
+2026-06-30 15:24:38 [right meow!] info: Server running on port 3000
+2026-06-30 15:24:43 [right meow!] info: Server running on port 3000
+2026-06-30 15:28:45 [right meow!] info: Server running on port 3000
+2026-06-30 15:30:45 [right meow!] info: Server running on port 3000
+2026-06-30 15:46:58 [right meow!] info: Server running on port 3000
+2026-06-30 15:47:07 [right meow!] info: Server running on port 3000
+2026-06-30 15:47:19 [right meow!] info: Server running on port 3000
+2026-06-30 15:47:58 [right meow!] info: Server running on port 3000
+2026-06-30 15:53:07 [right meow!] info: Server running on port 3000
+2026-06-30 16:33:30 [right meow!] info: Server running on port 3000
+2026-06-30 16:37:35 [right meow!] info: Server running on port 3000
+2026-06-30 16:37:39 [right meow!] info: Server running on port 3000
+2026-06-30 16:38:42 [right meow!] info: Server running on port 3000
+2026-06-30 16:38:53 [right meow!] info: Server running on port 3000
+2026-06-30 16:39:10 [right meow!] info: Server running on port 3000
+2026-06-30 16:59:35 [right meow!] info: Server running on port 3000
+2026-06-30 16:59:39 [right meow!] info: Server running on port 3000
+2026-06-30 17:01:54 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:03 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:16 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:27 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:34 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:40 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:47 [right meow!] info: Server running on port 3000
+2026-06-30 17:03:53 [right meow!] info: Server running on port 3000
+2026-06-30 17:04:00 [right meow!] info: Server running on port 3000
+2026-06-30 17:04:06 [right meow!] info: Server running on port 3000
+2026-06-30 17:07:41 [right meow!] info: Server running on port 3000
+2026-06-30 17:08:33 [right meow!] info: Server running on port 3000

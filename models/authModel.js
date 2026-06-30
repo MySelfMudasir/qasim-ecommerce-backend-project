@@ -5,6 +5,23 @@ export const getUserByEmail = async (email) => {
         'SELECT * FROM users WHERE email = $1',
         [email]
     );
+    return result.rows[0];
+};
 
+
+export const getUserById = async (id) => {
+
+    const result = await pool.query(
+        `
+        SELECT
+        id,
+        email,
+        role,
+        is_active
+        FROM users
+        WHERE id = $1
+        `,
+        [id]
+    );
     return result.rows[0];
 };

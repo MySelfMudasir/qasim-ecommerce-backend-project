@@ -59,7 +59,7 @@ export const findAll = async (req, res, next) => {
         return successResponse(
             res,
             'Users fetched successfully',
-            users.map(user => ({ id: user.id, name: user.name, email: user.email }))
+            users.map(user => ({ id: user.id, firstName: user.first_name, lastName: user.last_name, displayName: user.display_name, email: user.email, phoneNumber: user.phone_number, address: { streetAddress: user.street_address, city: user.city, state: user.state, zipCode: user.zip_code, country: user.country, }, businessName: user.business_name, businessType: user.business_type, primaryCategory: user.primary_category, monthlyOrders: user.monthly_orders, emailUpdates: user.email_updates, smsUpdates: user.sms_updates, marketingUpdates: user.marketing_updates, role: user.role, isActive: user.is_active, checkoutMode: user.checkout_mode })),
         );
         logger.info(`Users fetched successfully`);
     } catch (error) {
@@ -83,7 +83,8 @@ export const findOne = async (req, res, next) => {
         return successResponse(
             res,
             'User fetched successfully',
-            { id: user.id, name: user.name, email: user.email }
+            { id: user.id, firstName: user.first_name, lastName: user.last_name, displayName: user.display_name, email: user.email, phoneNumber: user.phone_number, address: { streetAddress: user.street_address, city: user.city, state: user.state, zipCode: user.zip_code, country: user.country, }, businessName: user.business_name, businessType: user.business_type, primaryCategory: user.primary_category, monthlyOrders: user.monthly_orders, emailUpdates: user.email_updates, smsUpdates: user.sms_updates, marketingUpdates: user.marketing_updates, role: user.role, isActive: user.is_active, checkoutMode: user.checkout_mode },
+            200
         );
     } catch (error) {
         next(error);
@@ -92,28 +93,25 @@ export const findOne = async (req, res, next) => {
 
 export const update = async (req, res, next) => {
     try {
-        const { name, email, password } = req.body;
+        const { firstName, lastName, displayName, email, phoneNumber, streetAddress, city, state, zipCode, country, businessName, businessType, primaryCategory, monthlyOrders, emailUpdates, smsUpdates, marketingUpdates, role, isActive, checkoutMode, password } = req.body;
+        const id = req.params.id;
 
-        const hashedPassword = await bcryptHash(password);
+        const data = { first_name: firstName, last_name: lastName, display_name: displayName, email, phone_number: phoneNumber, street_address: streetAddress, city, state, zip_code: zipCode, country, business_name: businessName, business_type: businessType, primary_category: primaryCategory, monthly_orders: monthlyOrders, email_updates: emailUpdates, sms_updates: smsUpdates, marketing_updates: marketingUpdates, role, is_active: isActive, checkout_mode: checkoutMode };
 
-        const user = await updateUser(
-            req.params.id,
-            name,
-            email,
-            hashedPassword
-        );
+        // Update password only if provided
+        if (password) {
+            data.password = await bcryptHash(password);
+        }
+
+        const user = await updateUser(id, data);
 
         if (!user) {
-            return errorResponse(
-                res,
-                'User not found',
-                404
-            );
+            return errorResponse(res, "User not found", 404);
         }
 
         return successResponse(
             res,
-            'User updated successfully',
+            "User updated successfully",
             user
         );
     } catch (error) {

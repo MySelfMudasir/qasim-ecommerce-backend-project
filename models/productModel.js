@@ -3,17 +3,7 @@ import fs from 'fs';
 import { buildProductImageUrl } from '../utils/fileUrl.js';
 
 
-export const createProduct = async (
-    name,
-    description,
-    price,
-    imageUrl,
-    inStock,
-    storageType,
-    size,
-    categoryId,
-    brandId
-) => {
+export const createProduct = async (name, description, price, imageUrl, inStock, storageType, size, categoryId, brandId, loginRole) => {
     const query = `
         INSERT INTO products (
             name,
@@ -32,17 +22,7 @@ export const createProduct = async (
         RETURNING *;
     `;
 
-    const values = [
-        name,
-        description,
-        price,
-        imageUrl,
-        inStock,
-        storageType,
-        size,
-        categoryId,
-        brandId
-    ];
+    const values = [name, description, price, imageUrl, inStock, storageType, size, categoryId, brandId];
 
     const result = await pool.query(query, values);
 
@@ -50,20 +30,7 @@ export const createProduct = async (
 };
 
 export const getAllProducts = async (filters) => {
-    const {
-        search,
-        brand,
-        brandId,
-        category,
-        categoryId,
-        storageType,
-        size,
-        minPrice,
-        maxPrice,
-        inStock,
-        page = 1,
-        limit = 10
-    } = filters;
+    const { search, brand, brandId, category, categoryId, storageType, size, minPrice, maxPrice, inStock, page = 1, limit = 10 } = filters;
 
     const offset = (Number(page) - 1) * Number(limit);
 

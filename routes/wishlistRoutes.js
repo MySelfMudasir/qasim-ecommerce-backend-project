@@ -1,5 +1,5 @@
 import express from 'express';
-import { verifyCookies, verifyToken } from '../src/middlewares/auth.js';
+import { verifyToken } from '../src/middlewares/auth.js';
 import { create, findAll, removeAll, remove } from '../controllers/wishlistController.js';
 
 const router = express.Router();

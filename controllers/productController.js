@@ -15,16 +15,7 @@ import {
 
 export const create = async (req, res, next) => {
     try {
-        const {
-            name,
-            description,
-            price,
-            categoryId,
-            brandId,
-            storageType,
-            size,
-            inStock
-        } = req.body;
+        const { name, description, price, categoryId, brandId, storageType, size, inStock, loginRole } = req.body;
 
         const thumbnail =
             req.files?.thumbnail?.[0]?.filename || null;
@@ -34,17 +25,7 @@ export const create = async (req, res, next) => {
                 file => file.filename
             ) || [];
 
-        const product = await createProduct(
-            name,
-            description,
-            price,
-            thumbnail,
-            inStock,
-            storageType,
-            size,
-            categoryId,
-            brandId
-        );
+        const product = await createProduct(name, description, price, thumbnail, inStock, storageType, size, categoryId, brandId, loginRole);
 
         if (gallery.length > 0) {
             await saveProductImages(
