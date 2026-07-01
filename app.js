@@ -26,6 +26,7 @@ app.use(
         origin: [
             'http://localhost:4200',
             'http://localhost:56560',
+            'https://myselfmudasir.github.io',
             'https://qasim-ecommerce-project.onrender.com',
         ],
         credentials: true
