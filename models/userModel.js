@@ -14,12 +14,27 @@ export const createUser = async (firstName, email, hashedPassword, phoneNumber, 
     return result.rows[0];
 };
 
-export const getAllUsers = async () => {
-    const result = await pool.query(
-        'SELECT * FROM users ORDER BY id DESC'
+export const getAllUsers = async (page = 1, limit = 10) => {
+    const offset = (page - 1) * limit;
+
+    const totalResult = await pool.query(
+        `SELECT COUNT(*) FROM users`
     );
 
-    return result.rows;
+    const total = Number(totalResult.rows[0].count);
+
+    const result = await pool.query(
+        `SELECT *
+        FROM users
+        ORDER BY id DESC
+        LIMIT $1
+        OFFSET $2 `, [limit, offset]
+    );
+
+    return {
+        users: result.rows,
+        pagination: { page, limit, total, totalPages: Math.ceil(total / limit), hasNextPage: page < Math.ceil(total / limit), hasPreviousPage: page > 1 }
+    };
 };
 
 export const getUserById = async (id) => {

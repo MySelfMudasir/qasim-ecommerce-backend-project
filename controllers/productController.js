@@ -47,12 +47,15 @@ export const create = async (req, res, next) => {
 
 export const findAll = async (req, res, next) => {
     try {
-        const products = await getAllProducts(req.query);
+        const result = await getAllProducts(req.query);
 
         return successResponse(
             res,
-            'Products fetched successfully',
-            products
+            "Products fetched successfully",
+            {
+                products: result.products,
+                pagination: result.pagination
+            }
         );
 
     } catch (error) {

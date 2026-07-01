@@ -30,11 +30,101 @@ export const createProduct = async (name, description, price, imageUrl, inStock,
 };
 
 export const getAllProducts = async (filters) => {
-    const { search, brand, brandId, category, categoryId, storageType, size, minPrice, maxPrice, inStock, page = 1, limit = 10 } = filters;
+    const {
+        search,
+        brand,
+        brandId,
+        category,
+        categoryId,
+        storageType,
+        size,
+        minPrice,
+        maxPrice,
+        inStock,
+        page = 1,
+        limit = 10
+    } = filters;
 
     const offset = (Number(page) - 1) * Number(limit);
 
-    let query = `
+    let where = ` WHERE 1=1 `;
+    const values = [];
+    let index = 1;
+
+    if (search) {
+        where += ` AND (p.name ILIKE $${index} OR p.description ILIKE $${index})`;
+        values.push(`%${search}%`);
+        index++;
+    }
+
+    if (brand) {
+        where += ` AND b.name ILIKE $${index}`;
+        values.push(`%${brand}%`);
+        index++;
+    }
+
+    if (brandId) {
+        where += ` AND b.id = $${index}`;
+        values.push(brandId);
+        index++;
+    }
+
+    if (category) {
+        where += ` AND c.name ILIKE $${index}`;
+        values.push(`%${category}%`);
+        index++;
+    }
+
+    if (categoryId) {
+        where += ` AND c.id = $${index}`;
+        values.push(categoryId);
+        index++;
+    }
+
+    if (storageType) {
+        where += ` AND p.storage_type ILIKE $${index}`;
+        values.push(`%${storageType}%`);
+        index++;
+    }
+
+    if (size) {
+        where += ` AND p.size ILIKE $${index}`;
+        values.push(`%${size}%`);
+        index++;
+    }
+
+    if (minPrice) {
+        where += ` AND p.price >= $${index}`;
+        values.push(Number(minPrice));
+        index++;
+    }
+
+    if (maxPrice) {
+        where += ` AND p.price <= $${index}`;
+        values.push(Number(maxPrice));
+        index++;
+    }
+
+    if (typeof inStock !== "undefined") {
+        where += ` AND p.in_stock = $${index}`;
+        values.push(inStock === "true");
+        index++;
+    }
+
+    // Total count
+    const countQuery = `
+        SELECT COUNT(*) AS total
+        FROM products p
+        LEFT JOIN categories c ON p.category_id = c.id
+        LEFT JOIN brands b ON p.brand_id = b.id
+        ${where}
+    `;
+
+    const totalResult = await pool.query(countQuery, values);
+    const total = Number(totalResult.rows[0].total);
+
+    // Data query
+    const query = `
         SELECT
             p.id,
             p.name,
@@ -53,110 +143,48 @@ export const getAllProducts = async (filters) => {
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.id
         LEFT JOIN brands b ON p.brand_id = b.id
-        WHERE 1=1
-    `;
-
-    const values = [];
-    let index = 1;
-
-    if (search) {
-        query += `
-            AND (
-                p.name ILIKE $${index}
-                OR p.description ILIKE $${index}
-            )
-        `;
-        values.push(`%${search}%`);
-        index++;
-    }
-
-    if (brand) {
-        query += ` AND b.name ILIKE $${index}`;
-        values.push(`%${brand}%`);
-        index++;
-    }
-
-    if (brandId) {
-        query += ` AND b.id = $${index}`;
-        values.push(brandId);
-        index++;
-    }
-
-    if (category) {
-        query += ` AND c.name ILIKE $${index}`;
-        values.push(`%${category}%`);
-        index++;
-    }
-
-    if (categoryId) {
-        query += ` AND c.id = $${index}`;
-        values.push(categoryId);
-        index++;
-    }
-
-    if (storageType) {
-        query += ` AND p.storage_type ILIKE $${index}`;
-        values.push(`%${storageType}%`);
-        index++;
-    }
-
-    if (size) {
-        query += ` AND p.size ILIKE $${index}`;
-        values.push(`%${size}%`);
-        index++;
-    }
-
-    if (minPrice) {
-        query += ` AND p.price >= $${index}`;
-        values.push(Number(minPrice));
-        index++;
-    }
-
-    if (maxPrice) {
-        query += ` AND p.price <= $${index}`;
-        values.push(Number(maxPrice));
-        index++;
-    }
-
-    if (typeof inStock !== 'undefined') {
-        query += ` AND p.in_stock = $${index}`;
-        values.push(inStock === 'true');
-        index++;
-    }
-
-    query += `
+        ${where}
         ORDER BY p.id DESC
         LIMIT $${index}
         OFFSET $${index + 1}
     `;
 
-    values.push(Number(limit));
-    values.push(offset);
-
-    const result = await pool.query(query, values);
+    const result = await pool.query(query, [
+        ...values,
+        Number(limit),
+        offset
+    ]);
 
     const products = await Promise.all(
         result.rows.map(async (product) => {
             const imagesRes = await pool.query(
-                `
-            SELECT image_url AS "imageUrl"
-            FROM product_images
-            WHERE product_id = $1
-            `,
+                `SELECT image_url AS "imageUrl"
+                 FROM product_images
+                 WHERE product_id = $1`,
                 [product.id]
             );
 
             return {
                 ...product,
                 imageUrl: buildProductImageUrl(product.imageUrl),
-                images: imagesRes.rows.map((img) =>
+                images: imagesRes.rows.map(img =>
                     buildProductImageUrl(img.imageUrl)
                 )
             };
         })
     );
 
-    return products;
+    return {
+        products,
+        pagination: {
+            page: Number(page),
+            limit: Number(limit),
+            total,
+            totalPages: Math.ceil(total / Number(limit)),
+            hasNextPage: Number(page) < Math.ceil(total / Number(limit)),
+            hasPreviousPage: Number(page) > 1
+        }
+    };
 };
 
 

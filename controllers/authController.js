@@ -136,7 +136,7 @@ export const register = async (req, res, next) => {
             return errorResponse(
                 res,
                 'User with this email already exists',
-                400
+                409
             );
         }
 

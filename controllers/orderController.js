@@ -2,7 +2,7 @@ import { approveOrderByAdmin, createOrder, getOrdersByAdmin, getOrdersByUser } f
 import { successResponse, errorResponse } from '../utils/response.js';
 
 export const placeOrder = async (req, res, next) => {
-    try {        
+    try {
         const order = await createOrder(req.body);
         return successResponse(res, 'Order placed successfully', order, 201);
     } catch (error) {
@@ -12,7 +12,7 @@ export const placeOrder = async (req, res, next) => {
 
 export const getUserOrders = async (req, res, next) => {
     try {
-        const { userId, orderStatus} = req.body;
+        const { userId, orderStatus } = req.body;
         const orders = await getOrdersByUser(userId, orderStatus);
         return successResponse(res, 'Orders fetched successfully', orders);
     } catch (error) {
@@ -22,8 +22,8 @@ export const getUserOrders = async (req, res, next) => {
 
 export const getAdminOrders = async (req, res, next) => {
     try {
-        const { orderStatus} = req.body;
-        const orders = await getOrdersByAdmin(orderStatus);
+        const { orderStatus = 'all', page = 1, limit = 10 } = req.body;
+        const orders = await getOrdersByAdmin(orderStatus, page, limit);
         return successResponse(res, 'Orders fetched successfully', orders);
     } catch (error) {
         next(error);

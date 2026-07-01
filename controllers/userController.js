@@ -42,29 +42,52 @@ export const create = async (req, res, next) => {
     }
 };
 
+// dummy data
+// const absPath = path.resolve('data/users.json');
+// const users = JSON.parse(
+//     fs.readFileSync(absPath, 'utf-8')
+// );
 export const findAll = async (req, res, next) => {
     try {
-        // dummy data
-        // const absPath = path.resolve('data/users.json');
-        // const users = JSON.parse(
-        //     fs.readFileSync(absPath, 'utf-8')
-        // );
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
 
-        const users = await getAllUsers();
-        if (!users || users.length === 0) {
-            return successResponse(res, 'No users found', []);
-            logger.info(`No users found`);
-        }
+        const result = await getAllUsers(page, limit);
 
         return successResponse(
             res,
             'Users fetched successfully',
-            users.map(user => ({ id: user.id, firstName: user.first_name, lastName: user.last_name, displayName: user.display_name, email: user.email, phoneNumber: user.phone_number, address: { streetAddress: user.street_address, city: user.city, state: user.state, zipCode: user.zip_code, country: user.country, }, businessName: user.business_name, businessType: user.business_type, primaryCategory: user.primary_category, monthlyOrders: user.monthly_orders, emailUpdates: user.email_updates, smsUpdates: user.sms_updates, marketingUpdates: user.marketing_updates, role: user.role, isActive: user.is_active, checkoutMode: user.checkout_mode })),
+            {
+                users: result.users.map(user => ({
+                    id: user.id,
+                    firstName: user.first_name,
+                    lastName: user.last_name,
+                    displayName: user.display_name,
+                    email: user.email,
+                    phoneNumber: user.phone_number,
+                    address: {
+                        streetAddress: user.street_address,
+                        city: user.city,
+                        state: user.state,
+                        zipCode: user.zip_code,
+                        country: user.country,
+                    },
+                    businessName: user.business_name,
+                    businessType: user.business_type,
+                    primaryCategory: user.primary_category,
+                    monthlyOrders: user.monthly_orders,
+                    emailUpdates: user.email_updates,
+                    smsUpdates: user.sms_updates,
+                    marketingUpdates: user.marketing_updates,
+                    role: user.role,
+                    isActive: user.is_active,
+                    checkoutMode: user.checkout_mode
+                })),
+                pagination: result.pagination
+            }
         );
-        logger.info(`Users fetched successfully`);
     } catch (error) {
         next(error);
-        logger.error(`Error fetching users: ${error.message}`);
     }
 };
 
