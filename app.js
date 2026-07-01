@@ -20,18 +20,18 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 
-// app.use(cors());
-app.use(
-    cors({
-        origin: [
-            'http://localhost:4200',
-            'http://localhost:56560',
-            'https://myselfmudasir.github.io',
-            'https://qasim-ecommerce-project.onrender.com',
-        ],
-        credentials: true
-    })
-);
+app.use(cors());
+// app.use(
+//     cors({
+//         origin: [
+//             'http://localhost:4200',
+//             'http://localhost:56560',
+//             'https://myselfmudasir.github.io',
+//             'https://qasim-ecommerce-project.onrender.com',
+//         ],
+//         credentials: true
+//     })
+// );
 
 
 app.use(
