@@ -12,6 +12,7 @@ import brandRoutes from './routes/brandRoutes.js';
 import adminRoutes from './admin/routes/adminRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
+import salesRoutes from './routes/salesRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import { apiLimiter } from './src/middlewares/rateLimit.js';
 import { errorHandler } from './src/middlewares/errorHandler.js';
@@ -20,18 +21,18 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 
-app.use(cors());
-// app.use(
-//     cors({
-//         origin: [
-//             'http://localhost:4200',
-//             'http://localhost:56560',
-//             'https://myselfmudasir.github.io',
-//             'https://qasim-ecommerce-project.onrender.com',
-//         ],
-//         credentials: true
-//     })
-// );
+// app.use(cors());
+app.use(
+    cors({
+        origin: [
+            'http://localhost:4200',
+            'http://localhost:56560',
+            'https://myselfmudasir.github.io',
+            'https://qasim-ecommerce-project.onrender.com',
+        ],
+        credentials: true
+    })
+);
 
 
 app.use(
@@ -70,6 +71,7 @@ app.use('/api/brands', brandRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/sales', salesRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/admin/auth', adminRoutes);
 
