@@ -292,3 +292,32 @@ export const approveOrderByAdmin = async (orderId, orderStatus) => {
     const result = await pool.query(query, params);
     return result.rows[0];
 };
+
+export const updatePaymentStatusByAdmin = async (orderId, paymentStatus) => {
+    const query = `
+        UPDATE orders
+        SET payment_status = $1,
+        updated_at = NOW()
+        WHERE id = $2
+        RETURNING *;
+    `;
+
+    const params = [paymentStatus, orderId];
+    const result = await pool.query(query, params);
+    return result.rows[0];
+};
+
+export const deleteOrderById = async (orderId) => {
+    // Delete associated order items first to avoid foreign key constraints
+    await pool.query('DELETE FROM order_items WHERE order_id = $1', [orderId]);
+    
+    const query = `
+        DELETE FROM orders
+        WHERE id = $1
+        RETURNING *;
+    `;
+
+    const params = [orderId];
+    const result = await pool.query(query, params);
+    return result.rows[0];
+};
