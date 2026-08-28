@@ -189,6 +189,15 @@ export const getOrdersByAdmin = async (orderStatus, page = 1, limit = 10, filter
     const offsetIndex = params.length;
 
     const query = `
+        WITH paged_orders AS (
+            SELECT o.id
+            FROM orders o
+            LEFT JOIN users u ON u.id = o.user_id
+            ${whereClause}
+            ORDER BY o.created_at DESC
+            LIMIT $${limitIndex}
+            OFFSET $${offsetIndex}
+        )
         SELECT
             o.id AS internal_order_id,
             o.order_number AS invoice_number,
@@ -228,17 +237,14 @@ export const getOrdersByAdmin = async (orderStatus, page = 1, limit = 10, filter
             b.name AS brand_name
 
         FROM orders o
+        JOIN paged_orders po ON po.id = o.id
         JOIN order_items oi ON oi.order_id = o.id
         JOIN products p ON p.id = oi.product_id
         JOIN users u ON u.id = o.user_id
         LEFT JOIN categories c ON p.category_id = c.id
         LEFT JOIN brands b ON p.brand_id = b.id
 
-        ${whereClause}
-
-        ORDER BY o.created_at DESC
-        LIMIT $${limitIndex}
-        OFFSET $${offsetIndex}
+        ORDER BY o.created_at DESC, oi.id ASC
     `;
 
     const result = await pool.query(query, params);
