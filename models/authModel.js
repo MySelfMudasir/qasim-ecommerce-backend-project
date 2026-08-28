@@ -2,8 +2,8 @@ import pool from '../config/db.js';
 
 export const getUserByEmail = async (email) => {
     const result = await pool.query(
-        'SELECT * FROM users WHERE email = $1',
-        [email]
+        'SELECT * FROM users WHERE LOWER(email) = LOWER($1)',
+        [email.trim()]
     );
     return result.rows[0];
 };

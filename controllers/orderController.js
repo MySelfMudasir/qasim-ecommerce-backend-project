@@ -1,4 +1,4 @@
-import { approveOrderByAdmin, createOrder, getOrdersByAdmin, getOrdersByUser, updatePaymentStatusByAdmin, deleteOrderById } from '../models/orderModel.js';
+import { approveOrderByAdmin, createOrder, getOrdersByAdmin, getOrdersByUser, updatePaymentStatusByAdmin, deleteOrderById, updateOrderByAdmin } from '../models/orderModel.js';
 import { successResponse, errorResponse } from '../utils/response.js';
 
 export const placeOrder = async (req, res, next) => {
@@ -61,6 +61,15 @@ export const deleteOrder = async (req, res, next) => {
             return errorResponse(res, 'Order not found', 404);
         }
         return successResponse(res, 'Order deleted successfully', order);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const updateOrder = async (req, res, next) => {
+    try {
+        await updateOrderByAdmin(req.params.orderId, req.body);
+        return successResponse(res, 'Order updated successfully');
     } catch (error) {
         next(error);
     }

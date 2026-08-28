@@ -1,0 +1,8 @@
+BEGIN;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+ALTER TABLE orders
+    ALTER COLUMN id SET DEFAULT gen_random_uuid();
+
+COMMIT;

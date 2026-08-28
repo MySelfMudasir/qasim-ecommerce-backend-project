@@ -104,7 +104,8 @@ export const login = async (req, res, next) => {
 
 export const register = async (req, res, next) => {
     try {
-        const { email, password } = req.body.account;
+        const { password } = req.body.account;
+        const email = req.body.account.email.trim().toLowerCase();
         const { verificationCode, phoneNumber, phoneCode } = req.body.email;
         const { firstName, lastName, displayName, streetAddress, city, state, zipCode, country } = req.body.profile;
         const { businessName, businessType, primaryCategory, monthlyOrders } = req.body.business;
@@ -142,7 +143,15 @@ export const register = async (req, res, next) => {
 
 
         const hashedPassword = await bcryptHash(password);
-        const user = await createUser(firstName, email, hashedPassword, phoneNumber, lastName, displayName, streetAddress, city, state, zipCode, country, businessName, businessType, primaryCategory, monthlyOrders, emailUpdates, smsUpdates, marketingUpdates);
+        let user;
+        try {
+            user = await createUser(firstName, email, hashedPassword, phoneNumber, lastName, displayName, streetAddress, city, state, zipCode, country, businessName, businessType, primaryCategory, monthlyOrders, emailUpdates, smsUpdates, marketingUpdates);
+        } catch (error) {
+            if (error.code === '23505') {
+                return errorResponse(res, 'User with this email already exists', 409);
+            }
+            throw error;
+        }
 
         return successResponse(
             res,
@@ -159,6 +168,26 @@ export const register = async (req, res, next) => {
         next(error);
     }
 }
+
+
+export const checkEmail = async (req, res, next) => {
+    try {
+        const email = req.body.email?.trim();
+
+        if (!email) {
+            return errorResponse(res, 'Email is required', 400);
+        }
+
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
+            return errorResponse(res, 'User with this email already exists', 409);
+        }
+
+        return successResponse(res, 'Email is available', { available: true }, 200);
+    } catch (error) {
+        next(error);
+    }
+};
 
 
 export const logout = async (req, res, next) => {
