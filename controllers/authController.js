@@ -88,7 +88,7 @@ export const login = async (req, res, next) => {
                     id: user.id,
                     name: user.displayName || user.first_name,
                     email: user.email,
-                    checkoutMode: "delivery",
+                    checkoutMode: user.checkout_mode,
                     role: user.role,
                     isActive: user.is_active
                 }
