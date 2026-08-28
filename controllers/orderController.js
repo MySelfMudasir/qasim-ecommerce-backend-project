@@ -22,8 +22,8 @@ export const getUserOrders = async (req, res, next) => {
 
 export const getAdminOrders = async (req, res, next) => {
     try {
-        const { orderStatus = 'all', page = 1, limit = 10 } = req.body;
-        const orders = await getOrdersByAdmin(orderStatus, page, limit);
+        const { orderStatus = 'all', page = 1, limit = 10, fromDate, toDate, orderId, customerName } = req.body;
+        const orders = await getOrdersByAdmin(orderStatus, page, limit, { fromDate, toDate, orderId, customerName });
         return successResponse(res, 'Orders fetched successfully', orders);
     } catch (error) {
         next(error);

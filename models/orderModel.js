@@ -6,47 +6,72 @@ export const createOrder = async (orderData) => {
     const randomOrderId = randomUUID();
     const { id = randomOrderId, userId, total, items, paymentStatus, orderStatus } = orderData;
 
-    const orderResult = await pool.query(`
-        INSERT INTO orders (
-            id, user_id, total, mode,
-            shipping_first_name, shipping_last_name, shipping_address, shipping_city, shipping_zip_code, shipping_state, shipping_country,
-            collection_location, collection_date, collection_time, 
-            payment_status, order_status
-        )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-        RETURNING *
-    `, [
-        id, userId, total, orderData.mode,
-        orderData.shipping?.firstName || null,
-        orderData.shipping?.lastName || null,
-        orderData.shipping?.address || null,
-        orderData.shipping?.city || null,
-        orderData.shipping?.zipCode || null,
-        orderData.shipping?.state || null,
-        orderData.shipping?.country || null,
+    const client = await pool.connect();
 
-        orderData.collection?.collectionLocation || null,
-        orderData.collection?.collectionDate || null,
-        orderData.collection?.collectionTime || null,
-        paymentStatus,
-        orderStatus
-    ]);
+    try {
+        await client.query('BEGIN');
 
-    // Insert order items
-    for (const item of items) {
-        await pool.query(`
-            INSERT INTO order_items (order_id, product_id, quantity, price)
-            VALUES ($1, $2, $3, $4)
-        `, [id, item.product.id, item.quantity, item.product.price]);
+        const orderResult = await client.query(`
+            INSERT INTO orders (
+                id, user_id, total, mode,
+                shipping_first_name, shipping_last_name, shipping_address, shipping_city, shipping_zip_code, shipping_state, shipping_country,
+                collection_location, collection_date, collection_time,
+                payment_status, order_status
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+            RETURNING *
+        `, [
+            id, userId, total, orderData.mode,
+            orderData.shipping?.firstName || null,
+            orderData.shipping?.lastName || null,
+            orderData.shipping?.address || null,
+            orderData.shipping?.city || null,
+            orderData.shipping?.zipCode || null,
+            orderData.shipping?.state || null,
+            orderData.shipping?.country || null,
+
+            orderData.collection?.collectionLocation || null,
+            orderData.collection?.collectionDate || null,
+            orderData.collection?.collectionTime || null,
+            paymentStatus,
+            orderStatus
+        ]);
+
+        for (const item of items) {
+            const quantity = Number(item.quantity);
+            const productId = item.product.id;
+
+            if (!Number.isInteger(quantity) || quantity <= 0) {
+                throw new Error(`Invalid quantity for product ${productId}`);
+            }
+
+            const stockResult = await client.query(`
+                UPDATE products
+                SET stock_quantity = stock_quantity - $1,
+                    in_stock = (stock_quantity - $1 > 0)
+                WHERE id = $2 AND stock_quantity >= $1
+                RETURNING id
+            `, [quantity, productId]);
+
+            if (stockResult.rowCount === 0) {
+                throw new Error(`Insufficient stock for product ${productId}`);
+            }
+
+            await client.query(`
+                INSERT INTO order_items (order_id, product_id, quantity, price)
+                VALUES ($1, $2, $3, $4)
+            `, [id, productId, quantity, item.product.price]);
+        }
+
+        await client.query('DELETE FROM cart WHERE user_id = $1', [userId]);
+        await client.query('COMMIT');
+        return orderResult.rows[0];
+    } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+    } finally {
+        client.release();
     }
-
-    // Clear user's cart after order placed
-    await pool.query(
-        'DELETE FROM cart WHERE user_id = $1',
-        [orderData.userId]
-    );
-
-    return orderResult.rows[0];
 };
 
 
@@ -125,7 +150,7 @@ export const getOrdersByUser = async (userId, orderStatus) => {
 };
 
 
-export const getOrdersByAdmin = async (orderStatus, page = 1, limit = 10) => {
+export const getOrdersByAdmin = async (orderStatus, page = 1, limit = 10, filters = {}) => {
     const offset = (page - 1) * limit;
 
     let whereClause = '';
@@ -136,10 +161,22 @@ export const getOrdersByAdmin = async (orderStatus, page = 1, limit = 10) => {
         whereClause = `WHERE o.order_status = $${params.length}`;
     }
 
+    const addFilter = (condition, value) => {
+        params.push(value);
+        const parameter = `$${params.length}`;
+        whereClause += whereClause ? ` AND ${condition.replace('$VALUE', parameter)}` : `WHERE ${condition.replace('$VALUE', parameter)}`;
+    };
+
+    if (filters.fromDate) addFilter('DATE(o.created_at) >= $VALUE', filters.fromDate);
+    if (filters.toDate) addFilter('DATE(o.created_at) <= $VALUE', filters.toDate);
+    if (filters.orderId) addFilter('o.id::text ILIKE $VALUE', `%${filters.orderId}%`);
+    if (filters.customerName) addFilter("CONCAT_WS(' ', u.first_name, u.last_name) ILIKE $VALUE", `%${filters.customerName}%`);
+
     // Count total orders (not rows)
     const countQuery = `
         SELECT COUNT(*) AS total
         FROM orders o
+        LEFT JOIN users u ON u.id = o.user_id
         ${whereClause}
     `;
 
